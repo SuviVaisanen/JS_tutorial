@@ -1,3 +1,5 @@
+//comment
+
 module.exports = Phrase;
 
 // Adds 'reverse' to all strings 
