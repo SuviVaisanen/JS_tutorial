@@ -18,7 +18,8 @@ function Phrase(content) {
 
     // Returns the letters in the content, e.g. "Hello, world!" === "Helloworld"
     this.letters = function letters() {
-        return (this.content.match(/[a-z]/gi) || []).join("");
+        const letterRegex = /[a-z]/gi
+        return (this.content.match(letterRegex) || []).join("");
     }
 
     // Returns a true palindrome or false otherwise.

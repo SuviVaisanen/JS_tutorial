@@ -3,21 +3,21 @@
 let assert = require("assert"); // lets assert things that are true in the test
 let Phrase = require("../index.js"); // requires the object itself
 
-describe("Phrase", function() {
+describe("Phrase", function () {
 
-    describe ("#palindrome", function() {
+    describe("#palindrome", function () {
 
-        it("should return false for a non-palindrome", function() {
+        it("should return false for a non-palindrome", function () {
             let nonPalindrome = new Phrase("loop");
             assert(!nonPalindrome.palindrome());
         });
 
-        it("should return a true for a plain palindrome", function() {
+        it("should return a true for a plain palindrome", function () {
             let plainPalindrome = new Phrase("racecar");
             assert(plainPalindrome.palindrome());
         });
 
-        it("should return true for a mixed-case palindrome", function() {
+        it("should return true for a mixed-case palindrome", function () {
             let mixedPalindrome = new Phrase("RaceCar");
             assert(mixedPalindrome.palindrome());
         });
@@ -28,10 +28,14 @@ describe("Phrase", function() {
         });
 
     });
-        describe("#letters", function() {
-        it("should return only letters", function() {
+    describe("#letters", function () {
+        it("should return only letters", function () {
             let punctuatedPalindrome = new Phrase("Madam, I'm Adam.");
-            assert.strictEqual(punctuatedPalindrome.letters(),"MadamImAdam");
+            assert.strictEqual(punctuatedPalindrome.letters(), "MadamImAdam");
+        });
+        it("should return the empty string on no match", function () {
+            let noLetters = new Phrase("1234.56");
+            assert.strictEqual(noLetters.letters(), "");
         });
     });
 });
