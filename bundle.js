@@ -1,15 +1,24 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 let Phrase = require("suvi_palindrome");
 
-let string = prompt("Please enter a string for palindrome testing: ");
-let phrase = new Phrase(string);
+function palindromeTester(event) {
+    event.preventDefault();
+    let phrase = new Phrase(event.target.phrase.value);
+let palindromeResult = document.querySelector("#palindromeResult");
 
-if (phrase.palindrome()) {
-    alert(`"${phrase.content}" is a palindrome!`);
-} else{
-    alert(`"${phrase.content}" is not a palindrome.`)
+    if (phrase.palindrome()) {
+        palindromeResult.innerHTML = `"<strong>${phrase.content}</strong>" is a palindrome!`;
+    } else {
+        palindromeResult.innerHTML = `"${phrase.content}" is not a palindrome.`;
+    }
 }
- 
+
+document.addEventListener("DOMContentLoaded", function () {
+    let tester = document.querySelector("#palindromeTester");
+    tester.addEventListener("submit", function (event) {
+        palindromeTester(event);
+    });
+});
 
 },{"suvi_palindrome":2}],2:[function(require,module,exports){
 module.exports = Phrase;
@@ -32,15 +41,21 @@ function Phrase(content) {
 
     // Returns the letters in the content, e.g. "Hello, world!" === "Helloworld"
     this.letters = function letters() {
-        return (this.content.match(/[a-z]/gi) || []).join("");
+        const letterRegex = /[a-z]/gi
+        return (this.content.match(letterRegex) || []).join("");
     }
 
     // Returns a true palindrome or false otherwise.
 
     this.palindrome = function palindrome() {
-        return this.processedContent() === this.processedContent().reverse();
+        if (this.processedContent()) {
+            return this.processedContent() === this.processedContent().reverse();
+        } else {
+        return false;
+        }
     }
 }
+
 
 
 },{}]},{},[1]);
